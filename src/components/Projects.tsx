@@ -37,6 +37,9 @@ const Projects = () => {
         "User-centered design approach",
         "Mental health resource integration",
         "Intuitive user interface",
+        "Focusing on users mental health",
+        "Giving users information on different Doctors",
+        "Allowing users access to different phone numbers for emergency",
         "Focus on accessibility"
       ],
       icon: <Smartphone size={32} />,
@@ -73,6 +76,7 @@ const Projects = () => {
         "Smooth scroll animations",
         "Responsive design",
         "Professional storytelling",
+         "Mobile Responsiveness",
         "Modern tech stack"
       ],
       icon: <Globe size={32} />,

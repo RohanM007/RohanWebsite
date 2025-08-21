@@ -185,7 +185,7 @@ const MatrixLoader = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              <h1>WELCOME TO THE MATRIX</h1>
+              <h1>WELCOME TO MY PORTFOLIO</h1>
               <p>Entering Rohan's Digital Realm...</p>
             </motion.div>
 
