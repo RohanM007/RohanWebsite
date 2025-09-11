@@ -11,6 +11,22 @@ const Experience = () => {
   const experiences = [
     {
       type: "work",
+      title: "Lecturer",
+      company: "Varsity College PMB",
+      location: "",
+      period: "August 2025 - December 2025",
+      description: "Lecturing Higher Certificate students in Principles of UX/UI and Web Development, focusing on foundational front-end technologies.",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      achievements: [
+        "Taught Principles of UX/UI design to Higher Certificate students",
+        "Lectured Web Development fundamentals",
+        "Guided students through hands-on coding exercises in HTML, CSS, and JavaScript",
+        "Contributed to building students’ problem-solving and web design skills"
+      ],
+      icon: <Briefcase size={24} />
+    },
+    {
+      type: "work",
       title: "Full-Stack Developer",
       company: "Drakewoods",
       location: "",
