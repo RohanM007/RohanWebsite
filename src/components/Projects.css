@@ -214,6 +214,9 @@
   margin-top: 1.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .project-link {
@@ -252,6 +255,16 @@
   box-shadow: 0 12px 30px rgba(0, 255, 65, 0.4);
   color: #000;
   background: linear-gradient(135deg, #00ffff, #00ff41);
+}
+
+.facebook-link {
+  background: linear-gradient(135deg, #1877f2, #0d65d9);
+}
+
+.facebook-link:hover {
+  background: linear-gradient(135deg, #0d65d9, #1877f2);
+  box-shadow: 0 12px 30px rgba(24, 119, 242, 0.4);
+  color: #fff;
 }
 
 .private-repo {
