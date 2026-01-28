@@ -14,7 +14,7 @@ const Experience = () => {
       title: "Lecturer",
       company: "Varsity College PMB",
       location: "",
-      period: "August 2025 - December 2025",
+      period: "August 2025 - Current",
       description: "Lecturing Higher Certificate students in Principles of UX/UI and Web Development, focusing on foundational front-end technologies.",
       technologies: ["HTML", "CSS", "JavaScript"],
       achievements: [

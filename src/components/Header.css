@@ -4,15 +4,17 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
   transition: all 0.3s ease;
 }
 
 .header.scrolled {
   background: rgba(0, 0, 0, 0.95);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  border-bottom-color: rgba(0, 255, 65, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 65, 0.1);
 }
 
 .header-container {
@@ -35,11 +37,12 @@
 
 .logo-text {
   font-size: 1.5rem;
-  font-weight: bold;
-  background: linear-gradient(135deg, #00ff00, #00aa00);
+  font-weight: 800;
+  background: linear-gradient(135deg, #00ff41, #00ffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: -0.02em;
 }
 
 .desktop-nav {
@@ -51,18 +54,35 @@
 .nav-item {
   background: none;
   border: none;
-  color: #fff;
+  color: #e0e0e0;
   font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
   transition: all 0.3s ease;
   position: relative;
+  overflow: hidden;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 255, 65, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .nav-item:hover {
-  color: #00ff00;
-  background: rgba(0, 255, 0, 0.1);
+  color: #00ff41;
+}
+
+.nav-item:hover::before {
+  opacity: 1;
 }
 
 .nav-item::after {
@@ -71,30 +91,41 @@
   bottom: 0;
   left: 50%;
   width: 0;
-  height: 2px;
-  background: #00ff00;
+  height: 3px;
+  background: linear-gradient(90deg, #00ff41, #00ffff);
   transition: all 0.3s ease;
   transform: translateX(-50%);
+  border-radius: 2px;
 }
 
 .nav-item:hover::after {
   width: 80%;
 }
 
+.nav-item.active {
+  color: #00ff41;
+}
+
+.nav-item.active::after {
+  width: 80%;
+}
+
 .mobile-menu-button {
   display: none;
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 65, 0.2);
   color: #fff;
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
   transition: all 0.3s ease;
 }
 
 .mobile-menu-button:hover {
-  color: #00ff00;
-  background: rgba(0, 255, 0, 0.1);
+  color: #00ff41;
+  background: rgba(0, 255, 65, 0.1);
+  border-color: #00ff41;
+  transform: scale(1.05);
 }
 
 .mobile-nav {

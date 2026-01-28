@@ -1,7 +1,20 @@
 .projects {
   padding: 6rem 0;
-  background: #000;
+  background: radial-gradient(ellipse at top, #0f0f0f 0%, #000000 70%);
   color: #fff;
+  position: relative;
+}
+
+.projects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 70% 30%, rgba(0, 255, 65, 0.05) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .projects-container {
@@ -23,12 +36,14 @@
 
 .project-card {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(0, 255, 0, 0.2);
-  border-radius: 1.5rem;
-  padding: 2.5rem;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  border-radius: 2rem;
+  padding: 3rem;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  will-change: transform;
 }
 
 .project-card::before {
@@ -37,16 +52,19 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #00ff00, #00aa00);
+  height: 5px;
+  background: linear-gradient(90deg, #00ff41, #00ffff, #a855f7);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 
+
+
 .project-card:hover {
-  transform: translateY(-10px);
-  border-color: #00ff00;
-  box-shadow: 0 20px 40px rgba(0, 255, 0, 0.1);
+  transform: translateY(-15px) scale(1.02);
+  border-color: #00ff41;
+  box-shadow: 0 25px 60px rgba(0, 255, 65, 0.25);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .project-card:hover::before {
@@ -69,13 +87,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #00ff00, #00aa00);
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, #00ff41, #00ffff);
   border-radius: 50%;
   color: #000;
   margin: 0 auto 2rem;
-  box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+  box-shadow: 0 0 40px rgba(0, 255, 65, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+}
+
+.project-card:hover .project-icon {
+  transform: scale(1.1);
+  box-shadow: 0 0 60px rgba(0, 255, 65, 0.7);
 }
 
 .project-content {
@@ -140,13 +167,24 @@
 }
 
 .tech-tag {
-  background: rgba(0, 255, 0, 0.1);
-  color: #00ff00;
-  padding: 0.4rem 0.8rem;
-  border-radius: 1rem;
-  font-size: 0.8rem;
-  border: 1px solid rgba(0, 255, 0, 0.3);
+  background: rgba(0, 255, 65, 0.1);
+  backdrop-filter: blur(5px);
+  color: #00ff41;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-size: 0.85rem;
+  border: 1px solid rgba(0, 255, 65, 0.3);
   font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.tech-tag:hover {
+  background: rgba(0, 255, 65, 0.2);
+  border-color: #00ff41;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 255, 65, 0.2);
 }
 
 .project-highlights ul {
@@ -182,19 +220,38 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #00ff00, #00aa00);
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #00ff41, #00ffff);
   color: #000;
   text-decoration: none;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   font-weight: 600;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.project-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.project-link:hover::before {
+  left: 100%;
 }
 
 .project-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 255, 0, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 255, 65, 0.4);
   color: #000;
+  background: linear-gradient(135deg, #00ffff, #00ff41);
 }
 
 .private-repo {
