@@ -1,14 +1,28 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ExternalLink, Github, Smartphone, Globe } from 'lucide-react'
+import { ExternalLink, Github, Smartphone, Globe, Facebook } from 'lucide-react'
 import './Projects.css'
+
+interface Project {
+  title: string
+  description: string
+  longDescription: string
+  technologies: string[]
+  type: string
+  duration: string
+  highlights: string[]
+  icon: React.ReactElement
+  category: string
+  githubLink?: string
+  facebookLink?: string
+}
 
 const Projects = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
-  const projects = [
+  const projects: Project[] = [
     {
       title: "Drakewoods Website & Mobile App",
       description: "A comprehensive digital solution for Drakewoods in Pietermaritzburg, featuring both a responsive website and native Android application. This project showcased my ability to deliver complete end-to-end solutions.",
@@ -29,7 +43,7 @@ const Projects = () => {
     {
       title: "Mend Mental Health App",
       description: "A mental health support application designed to provide resources and tools for mental wellness. This project demonstrates my commitment to creating technology that makes a positive impact.",
-      longDescription: "Developed as part of my academic journey, this application focuses on mental health support with user-friendly interfaces and helpful resources for mental wellness.",
+      longDescription: "Developed as part of my academic journey, this application focuses on mental health support with user-friendly interfaces and helpful resources for mental wellness. My cousin won an award at her school for this project!",
       technologies: ["Mobile Development", "UI/UX Design", "Health Tech"],
       type: "Mobile Application",
       duration: "Academic Project",
@@ -44,7 +58,8 @@ const Projects = () => {
       ],
       icon: <Smartphone size={32} />,
       category: "Academic",
-      githubLink: "https://github.com/RohanM007/Mend"
+      githubLink: "https://github.com/RohanM007/Mend",
+      facebookLink: "https://www.facebook.com/share/p/1ASLtP12AL/"
     },
     {
       title: "💖 Valentine's Day Special Website",
@@ -144,21 +159,34 @@ const Projects = () => {
                   </ul>
                 </div>
 
-                {project.githubLink && (
+                {(project.githubLink || project.facebookLink) && (
                   <div className="project-links">
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project-link github-link"
-                    >
-                      <Github size={20} />
-                      View on GitHub
-                    </a>
+                    {project.githubLink && (
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link github-link"
+                      >
+                        <Github size={20} />
+                        View on GitHub
+                      </a>
+                    )}
+                    {project.facebookLink && (
+                      <a
+                        href={project.facebookLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link facebook-link"
+                      >
+                        <Facebook size={20} />
+                        School Feature
+                      </a>
+                    )}
                   </div>
                 )}
 
-                {!project.githubLink && project.category === "Professional" && (
+                {!project.githubLink && !project.facebookLink && project.category === "Professional" && (
                   <div className="project-links">
                     <div className="private-repo">
                       <span className="private-badge">🔒 Private Repository</span>
