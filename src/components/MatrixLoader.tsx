@@ -2,12 +2,6 @@ import { useEffect, useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import './MatrixLoader.css'
 
-interface MatrixColumn {
-  chars: string[]
-  speed: number
-  opacity: number[]
-  y: number
-}
 
 const MatrixLoader = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { ExternalLink, Github, Smartphone, Globe, Facebook } from 'lucide-react'
+import {Github, Smartphone, Globe, Facebook } from 'lucide-react'
 import './Projects.css'
 
 interface Project {
