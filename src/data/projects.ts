@@ -52,5 +52,32 @@ export const projects = [
         "Modern tech stack"
       ],
       category: "Personal"
-    }
+    },
+    {
+    title: "Kingdom Kids Website",
+    description: "A responsive website developed for Kingdom Kids, designed to provide a modern and accessible online presence while making important information easy for parents and visitors to find.",
+    longDescription: "Developed as a complete website solution for Kingdom Kids, with a focus on clean design, usability, responsive layouts, and accessibility across desktop and mobile devices. The project involved designing and developing the website, preparing it for production, and deploying the completed build to a live hosting environment. Access the link here: https://www.kingdomkidspreschool.co.za/",
+    technologies: [
+      "React",
+      "TypeScript",
+      "CSS3",
+      "Vite",
+      "Responsive Design",
+      "Web Hosting"
+    ],
+    type: "Web Development",
+    duration: "2026",
+    highlights: [
+      "Modern responsive website design",
+      "Mobile-friendly layout",
+      "Clear and accessible navigation",
+      "Optimized production build using Vite",
+      "Live website deployment and hosting",
+      "Search engine files including sitemap and robots.txt"
+    ],
+    category: "Professional",
+    githubLink: "https://github.com/RohanM007/TimWebsite",
+
+    
+  },
   ]
