@@ -61,24 +61,7 @@ const Projects = () => {
       githubLink: "https://github.com/RohanM007/Mend",
       facebookLink: "https://www.facebook.com/share/p/1ASLtP12AL/"
     },
-    {
-      title: "💖 Valentine's Day Special Website",
-      description: "A heartfelt, interactive web project designed to express love and appreciation in a creative and fun way. This project showcases my HTML, CSS, and JavaScript skills through romantic animations and interactive elements.",
-      longDescription: "Created as a personalized digital gift, this project features animated hearts, delayed text reveals, interactive buttons, and personal love notes. Built while practicing front-end fundamentals with a creative twist.",
-      technologies: ["HTML5", "CSS3", "JavaScript", "Animations", "Interactive Design"],
-      type: "Web Development",
-      duration: "Personal Practice Project",
-      highlights: [
-        "Romantic landing page with floating hearts",
-        "Interactive Yes/No buttons with animations",
-        "Timed text reveal effects",
-        "Multiple themed pages (reasons, story, playful)",
-        "Creative use of CSS animations and JavaScript"
-      ],
-      icon: <Globe size={32} />,
-      category: "Personal",
-      githubLink: "https://github.com/RohanM007/ValentinesDay"
-    },
+    
     {
       title: "Portfolio Website",
       description: "This very portfolio you're viewing! Built with React, TypeScript, and Framer Motion to showcase my journey and skills in an interactive and engaging way.",
