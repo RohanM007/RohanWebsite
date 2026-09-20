@@ -90,7 +90,7 @@ h2 { font: 500 33px/1.25 var(--heading); letter-spacing: -1.3px; margin: 0; }
 .stack-subtitle { font: 8px var(--mono); letter-spacing: .8px; color: #929d96; margin: 0 0 23px; }
 .stack-list { display: flex; flex-direction: column; gap: 14px; padding-bottom: 26px; }
 .stack-list > span { font-size: 12px; display: flex; align-items: center; gap: 9px; color: #c4cdc7; }
-.stack-list i { height: 4px; width: 4px; background: #536c5c; }
+.stack-skill-icon { width: 20px; height: 20px; flex: 0 0 20px; object-fit: contain; }
 .skill-tag { margin-left: auto; color: var(--green); font: 7px var(--mono); padding: 3px 5px; border: 1px solid #00ff6633; border-radius: 2px; background: #00ff6609; }
 .stack-note { margin-top: auto; border-top: 1px solid var(--border); padding-top: 16px; font: 8px var(--mono); color: #919e96; }
 .stack-note > span { color: var(--green); margin-right: 4px; }
