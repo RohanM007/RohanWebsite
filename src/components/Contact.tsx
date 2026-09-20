@@ -1,199 +1,33 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { Mail, Github, Send, CheckCircle } from 'lucide-react'
-import './Contact.css'
+import { useState } from 'react'
+import { ArrowUpRight, Check, Copy, Github, Mail, Send } from 'lucide-react'
+import SectionHeading from './SectionHeading'
+import Terminal from './Terminal'
 
-const Contact = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+export default function Contact() {
+  const [copied, setCopied] = useState(false)
+  const [copyMessage, setCopyMessage] = useState('')
+  const [draftOpened, setDraftOpened] = useState(false)
+  const copyEmail = async () => {
+    try { await navigator.clipboard.writeText('rohanmaharaj708@gmail.com'); setCopied(true); setCopyMessage('Email address copied.') }
+    catch { setCopyMessage('Could not copy. Select the email address or use the email link.') }
   }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Create mailto link with form data
-    const subject = encodeURIComponent(formData.subject || 'Portfolio Contact')
-    const body = encodeURIComponent(
-      `Hi Rohan,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    )
-    window.location.href = `mailto:rohanmaharaj708@gmail.com?subject=${subject}&body=${body}`
-    setIsSubmitted(true)
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({ name: '', email: '', subject: '', message: '' })
-    }, 3000)
-  }
-
-  const contactInfo = [
-    {
-      icon: <Mail size={24} />,
-      label: "Email",
-      value: "rohanmaharaj708@gmail.com",
-      link: "mailto:rohanmaharaj708@gmail.com"
-    },
-    {
-      icon: <Github size={24} />,
-      label: "GitHub",
-      value: "RohanM007",
-      link: "https://github.com/RohanM007"
-    }
-  ]
-
-  return (
-    <section id="contact" className="contact" ref={ref}>
-      <div className="contact-container">
-        <motion.div
-          className="contact-header"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="section-title">Let's Connect</h2>
-          <p className="section-subtitle">
-            Ready to bring your vision to life? Let's discuss your next project
-          </p>
-        </motion.div>
-
-        <div className="contact-content">
-          <motion.div
-            className="contact-info"
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h3>Get In Touch</h3>
-            <p>
-              I'm always excited to work on new projects and collaborate with fellow developers.
-              Whether you have a project in mind or just want to connect, feel free to reach out!
-            </p>
-
-            <div className="contact-details">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={info.label}
-                  className="contact-item"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                >
-                  <div className="contact-icon">
-                    {info.icon}
-                  </div>
-                  <div className="contact-text">
-                    <span className="contact-label">{info.label}</span>
-                    {info.link ? (
-                      <a href={info.link} target="_blank" rel="noopener noreferrer" className="contact-value">
-                        {info.value}
-                      </a>
-                    ) : (
-                      <span className="contact-value">{info.value}</span>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="contact-form-container"
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <h3>Send a Message</h3>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="subject"
-                  placeholder="Subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  rows={5}
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                ></textarea>
-              </div>
-
-              <button type="submit" className="submit-btn" disabled={isSubmitted}>
-                {isSubmitted ? (
-                  <>
-                    <CheckCircle size={20} />
-                    Message Sent!
-                  </>
-                ) : (
-                  <>
-                    <Send size={20} />
-                    Send Message
-                  </>
-                )}
-              </button>
-            </form>
-          </motion.div>
-        </div>
+  return <section id="contact" className="section contact-section shell">
+    <SectionHeading number="05" label="LET’S MAKE A CONNECTION" title="Your next idea starts with hello."><p>Have a project in mind, or just want to connect?<br />My inbox is a good place to start.</p></SectionHeading>
+    <div className="contact-grid">
+      <section id="terminal" className="contact-terminal" aria-label="Interactive terminal"><div className="terminal-overline"><span>DIRECT INTERFACE</span><span>⌘ / CLI</span></div><Terminal /></section>
+      <div className="contact-card"><div className="eyebrow"><span className="status-dot" /> DIRECT TRANSMISSION</div><h3>Let’s build something<br /><span>worth putting into the world.</span></h3><p>Projects, collaborations, or a conversation about technology. I’d love to hear from you.</p>
+        <div className="contact-address"><Mail size={19} /><div><span>EMAIL ADDRESS</span><a href="mailto:rohanmaharaj708@gmail.com">rohanmaharaj708@gmail.com</a></div><button aria-label="Copy email address" onClick={copyEmail}>{copied ? <Check size={17} /> : <Copy size={17} />}</button></div>
+        <a className="contact-address github-address" href="https://github.com/RohanM007" target="_blank" rel="noreferrer"><Github size={19} /><div><span>GITHUB</span><strong>github.com/rohanm007</strong></div><ArrowUpRight size={18} /></a>
+        <p className="copy-status" role="status">{copyMessage}</p>
+        <details className="message-details"><summary>Prefer to write a message? <Send size={14} /></summary><form onSubmit={event => {
+          event.preventDefault()
+          const data = new FormData(event.currentTarget)
+          const body = `Hi Rohan,\n\n${data.get('message')}\n\nFrom: ${data.get('name')}\nEmail: ${data.get('email')}`
+          window.location.href = 'mailto:rohanmaharaj708@gmail.com?subject=' + encodeURIComponent(String(data.get('subject'))) + '&body=' + encodeURIComponent(body)
+          setDraftOpened(true)
+        }}><div className="form-row"><label>Your name<input required name="name" autoComplete="name" maxLength={100} /></label><label>Your email<input required name="email" type="email" autoComplete="email" maxLength={200} /></label></div><label>Subject<input required name="subject" maxLength={150} /></label><label>Your message<textarea required name="message" rows={4} maxLength={2000} /></label><button className="button button-primary" type="submit">Open email draft <ArrowUpRight size={15} /></button><p className="form-note" role="status">{draftOpened ? 'Your email app has been requested. Send the draft there to complete your message.' : 'Opens your email app so you can review and send.'}</p></form></details>
       </div>
-
-      <motion.footer
-        className="footer"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.6 }}
-      >
-        <div className="footer-content">
-          <p>&copy; 2024 Rohan Maharaj. Built with passion and dedication.</p>
-          <p>From curiosity to code - turning visions into reality.</p>
-        </div>
-      </motion.footer>
-    </section>
-  )
+    </div>
+    <div className="closing-line"><span className="status-dot" /><span>END OF PAGE. START OF A CONVERSATION.</span><a href="#hero">Back to top ↑</a></div>
+  </section>
 }
-
-export default Contact

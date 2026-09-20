@@ -1,110 +1,31 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-import './Header.css'
+import { useEffect, useState } from 'react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
 
-const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+const links = [['about', 'About'], ['skills', 'Stack'], ['projects', 'Projects'], ['experience', 'Experience'], ['terminal', 'Terminal'], ['contact', 'Contact']]
 
+export default function Header() {
+  const [open, setOpen] = useState(false)
+  const [active, setActive] = useState('')
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id) })
+    }, { rootMargin: '-15% 0px -60% 0px' })
+    document.querySelectorAll('main section[id]').forEach(section => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsMobileMenuOpen(false)
-    }
-  }
-
-  const navItems = [
-    { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' }
-  ]
-
-  return (
-    <motion.header
-      className={`header ${isScrolled ? 'scrolled' : ''}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div className="header-container">
-        <motion.div
-          className="logo"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          onClick={() => scrollToSection('hero')}
-        >
-          <span className="logo-text">Rohan Maharaj</span>
-        </motion.div>
-
-        {/* Desktop Navigation */}
-        <nav className="desktop-nav">
-          {navItems.map((item, index) => (
-            <motion.button
-              key={item.id}
-              className="nav-item"
-              onClick={() => scrollToSection(item.id)}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {item.label}
-            </motion.button>
-          ))}
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <motion.button
-          className="mobile-menu-button"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </motion.button>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <motion.div
-            className="mobile-nav"
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.3 }}
-          >
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item.id}
-                className="mobile-nav-item"
-                onClick={() => scrollToSection(item.id)}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                {item.label}
-              </motion.button>
-            ))}
-          </motion.div>
-        )}
-      </div>
-    </motion.header>
-  )
+  useEffect(() => {
+    const close = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpen(false) }
+    window.addEventListener('keydown', close)
+    return () => window.removeEventListener('keydown', close)
+  }, [])
+  return <header className="site-header">
+    <div className="shell header-inner">
+      <a href="#hero" className="brand" aria-label="Rohan, home" onClick={() => setOpen(false)}>[<span>ROHAN.DEV</span>]<i className="brand-cursor" /></a>
+      <nav id="main-navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label="Main navigation">
+        {links.map(([id, label]) => <a key={id} href={`#${id}`} aria-current={active === id ? 'location' : undefined} onClick={() => setOpen(false)}>{label}</a>)}
+      </nav>
+      <a className="button button-small resume-link" href="mailto:rohanmaharaj708@gmail.com?subject=Resume%20request">Request résumé <ArrowUpRight size={14} /></a>
+      <button className="menu-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
+    </div>
+  </header>
 }
-
-export default Header

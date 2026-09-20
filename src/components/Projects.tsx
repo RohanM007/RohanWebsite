@@ -1,189 +1,21 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
-import {Github, Smartphone, Globe, Facebook } from 'lucide-react'
-import './Projects.css'
+import { ArrowUpRight, Github, LockKeyhole, Globe, Smartphone, Code2, Check } from 'lucide-react'
+import SectionHeading from './SectionHeading'
+import { projects } from '../data/projects'
 
-interface Project {
-  title: string
-  description: string
-  longDescription: string
-  technologies: string[]
-  type: string
-  duration: string
-  highlights: string[]
-  icon: React.ReactElement
-  category: string
-  githubLink?: string
-  facebookLink?: string
+function ProjectVisual({ index }: { index: number }) {
+  if (index === 0) return <div className="architecture-visual" aria-label="Drakewoods architecture: React web and Kotlin Android connected to Google Cloud Functions"><div className="visual-caption"><span className="status-dot" /> FULL-STACK ARCHITECTURE <span>WEB + MOBILE</span></div><div className="architecture-clients"><div><Globe size={23} /><span>React</span><small>WEB APPLICATION</small></div><span className="architecture-plus">+</span><div><Smartphone size={23} /><span>Kotlin</span><small>NATIVE ANDROID</small></div></div><div className="connector-lines"><i /><i /></div><div className="cloud-block"><span className="cloud-symbol">{'{ }'}</span><div><strong>Google Cloud Functions</strong><small>BACKEND SERVICES / FIREBASE</small></div><span className="status-dot" /></div><div className="architecture-foot"><Check size={12} /> One connected digital experience</div></div>
+  if (index === 1) return <div className="mend-visual" aria-label="Mend mental health project illustration"><div className="mend-orbit orbit-one" /><div className="mend-orbit orbit-two" /><div className="mend-symbol">m<span>·</span></div><span className="visual-corner">DESIGNED WITH EMPATHY</span><span className="visual-index">02 / MOBILE</span></div>
+  return <div className="portfolio-visual" aria-label="Portfolio code illustration"><div className="mini-editor"><div className="mini-editor-bar"><Code2 size={12} /> portfolio.tsx <span>×</span></div><div className="mini-code"><p><i>01</i><span>const</span> developer = {'{'}</p><p><i>02</i>  name: <b>'Rohan'</b>,</p><p><i>03</i>  drivenBy: <b>'curiosity'</b>,</p><p><i>04</i>  alwaysLearning: <span>true</span></p><p><i>05</i>{'};'}</p><p><i>06</i><span>export default</span> developer;</p></div></div><span className="visual-corner">YOU ARE HERE</span><span className="visual-index">03 / WEB</span></div>
 }
-
-const Projects = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
-  const projects: Project[] = [
-    {
-      title: "Drakewoods Website & Mobile App",
-      description: "A comprehensive digital solution for Drakewoods in Pietermaritzburg, featuring both a responsive website and native Android application. This project showcased my ability to deliver complete end-to-end solutions.",
-      longDescription: "Built from January to July 2025, this project involved creating a modern, responsive website using React and a native Android application using Kotlin. The backend was powered by Google Cloud Functions, providing scalable and reliable services.",
-      technologies: ["React", "Kotlin", "Android Studio", "Google Cloud Functions", "Firebase", "Responsive Design"],
-      type: "Full-Stack Development",
-      duration: "7 months (Jan - July 2025)",
-      highlights: [
-        "Responsive web application with modern UI/UX",
-        "Native Android app with smooth performance",
-        "Cloud-based backend infrastructure",
-        "Real-time data synchronization",
-        "Professional client delivery"
-      ],
-      icon: <Globe size={32} />,
-      category: "Professional"
-    },
-    {
-      title: "Mend Mental Health App",
-      description: "A mental health support application designed to provide resources and tools for mental wellness. This project demonstrates my commitment to creating technology that makes a positive impact.",
-      longDescription: "Developed as part of my academic journey, this application focuses on mental health support with user-friendly interfaces and helpful resources for mental wellness. My cousin won an award at her school for this project!",
-      technologies: ["Mobile Development", "UI/UX Design", "Health Tech"],
-      type: "Mobile Application",
-      duration: "Academic Project",
-      highlights: [
-        "User-centered design approach",
-        "Mental health resource integration",
-        "Intuitive user interface",
-        "Focusing on users mental health",
-        "Giving users information on different Doctors",
-        "Allowing users access to different phone numbers for emergency",
-        "Focus on accessibility"
-      ],
-      icon: <Smartphone size={32} />,
-      category: "Academic",
-      githubLink: "https://github.com/RohanM007/Mend",
-      facebookLink: "https://www.facebook.com/share/p/1ASLtP12AL/"
-    },
-    
-    {
-      title: "Portfolio Website",
-      description: "This very portfolio you're viewing! Built with React, TypeScript, and Framer Motion to showcase my journey and skills in an interactive and engaging way.",
-      longDescription: "A modern, responsive portfolio website featuring a matrix loading screen, smooth animations, and professional design. Built to tell my story and showcase my technical capabilities.",
-      technologies: ["React", "TypeScript", "Framer Motion", "CSS3", "Responsive Design", "Vite"],
-      type: "Web Development",
-      duration: "2024",
-      highlights: [
-        "Matrix-style loading animation",
-        "Smooth scroll animations",
-        "Responsive design",
-        "Professional storytelling",
-         "Mobile Responsiveness",
-        "Modern tech stack"
-      ],
-      icon: <Globe size={32} />,
-      category: "Personal"
-    }
-  ]
-
-  return (
-    <section id="projects" className="projects" ref={ref}>
-      <div className="projects-container">
-        <motion.div
-          className="projects-header"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="section-title">Featured Projects</h2>
-          <p className="section-subtitle">
-            Showcasing my journey through code and creativity
-          </p>
-        </motion.div>
-
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              className={`project-card ${project.category.toLowerCase()}`}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 + index * 0.2 }}
-            >
-              <div className="project-icon">
-                {project.icon}
-              </div>
-
-              <div className="project-content">
-                <div className="project-header">
-                  <h3 className="project-title">{project.title}</h3>
-                  <div className="project-meta">
-                    <span className="project-type">{project.type}</span>
-                    <span className="project-duration">{project.duration}</span>
-                  </div>
-                </div>
-
-                <p className="project-description">{project.description}</p>
-                <p className="project-long-description">{project.longDescription}</p>
-
-                <div className="project-technologies">
-                  <h4>Technologies Used:</h4>
-                  <div className="tech-tags">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className="tech-tag">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="project-highlights">
-                  <h4>Key Highlights:</h4>
-                  <ul>
-                    {project.highlights.map((highlight, highlightIndex) => (
-                      <li key={highlightIndex}>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                {(project.githubLink || project.facebookLink) && (
-                  <div className="project-links">
-                    {project.githubLink && (
-                      <a
-                        href={project.githubLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link github-link"
-                      >
-                        <Github size={20} />
-                        View on GitHub
-                      </a>
-                    )}
-                    {project.facebookLink && (
-                      <a
-                        href={project.facebookLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link facebook-link"
-                      >
-                        <Facebook size={20} />
-                        School Feature
-                      </a>
-                    )}
-                  </div>
-                )}
-
-                {!project.githubLink && !project.facebookLink && project.category === "Professional" && (
-                  <div className="project-links">
-                    <div className="private-repo">
-                      <span className="private-badge">🔒 Private Repository</span>
-                      <p className="private-note">Code samples available upon request</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+export default function Projects() {
+  return <section id="projects" className="section shell">
+    <SectionHeading number="03" label="SELECTED WORK" title="Ideas shipped into the real world."><a className="text-link" href="https://github.com/RohanM007" target="_blank" rel="noreferrer"><Github size={16} /> Explore GitHub <ArrowUpRight size={15} /></a></SectionHeading>
+    <div className="project-grid">{projects.map((project, index) => <article className={`project-card ${index === 0 ? 'project-featured' : ''}`} key={project.title}>
+      <ProjectVisual index={index} />
+      <div className="project-content"><div className="project-kicker"><span>{index === 0 ? 'FEATURED PROJECT' : project.category.toUpperCase() + ' PROJECT'}</span><span>{index === 0 ? '2025' : index === 1 ? 'MOBILE APPLICATION' : 'PERSONAL PORTFOLIO'}</span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tags">{project.technologies.map(tech => <span key={tech}>{tech}</span>)}</div>
+        <details className="project-details"><summary>Project details <span>+</span></summary><p>{index === 2 ? 'A responsive, Matrix-inspired portfolio with an interactive terminal, accessible navigation, and a focus on telling my story through real projects.' : project.longDescription}</p><ul>{(index === 2 ? ['Interactive terminal with keyboard command history', 'Responsive layouts for desktop, tablet, and mobile', 'Accessible navigation and reduced-motion support', 'React, TypeScript, and Tailwind CSS'] : project.highlights).map(highlight => <li key={highlight}>{highlight}</li>)}</ul></details>
+        <div className="project-links">{project.githubLink && <a className="text-link" href={project.githubLink} target="_blank" rel="noreferrer">View source <ArrowUpRight size={15} /></a>}{project.facebookLink && <a className="text-link" href={project.facebookLink} target="_blank" rel="noreferrer">School feature <ArrowUpRight size={15} /></a>}{index === 0 && <><span className="private-label"><LockKeyhole size={13} /> Private repository</span><a className="text-link" href="mailto:rohanmaharaj708@gmail.com?subject=Drakewoods%20code%20sample%20request">Request a walkthrough <ArrowUpRight size={15} /></a></>}{index === 2 && <a className="text-link" href="https://github.com/RohanM007/RohanPortfolio" target="_blank" rel="noreferrer">View source <ArrowUpRight size={15} /></a>}</div>
       </div>
-    </section>
-  )
+    </article>)}</div>
+  </section>
 }
-
-export default Projects

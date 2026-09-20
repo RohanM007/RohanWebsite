@@ -1,227 +1,112 @@
 .matrix-loader {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #000;
-  overflow: hidden;
+  inset: 0;
   z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.matrix-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.matrix-overlay {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  font-family: 'Courier New', monospace;
-}
-
-.loading-interface {
-  text-align: center;
-  color: #00ff00;
-  max-width: 500px;
-  padding: 2rem;
-}
-
-.loading-header {
-  margin-bottom: 3rem;
-}
-
-.matrix-logo {
-  font-size: 2rem;
-  font-weight: bold;
-  letter-spacing: 0.1em;
-  text-shadow: 0 0 20px #00ff00;
-}
-
-.bracket {
-  color: #00aa00;
-  font-size: 2.5rem;
-}
-
-.logo-text {
-  color: #00ff00;
-  margin: 0 0.5rem;
-}
-
-.loading-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.loading-text {
-  font-size: 1.2rem;
-  color: #00ff00;
-  text-shadow: 0 0 10px #00ff00;
-  letter-spacing: 0.05em;
-  min-height: 1.5rem;
-}
-
-.progress-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  background: rgba(0, 255, 0, 0.2);
-  border-radius: 3px;
-  overflow: hidden;
-  border: 1px solid rgba(0, 255, 0, 0.3);
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #00ff00, #00aa00, #00ff00);
-  background-size: 200% 100%;
-  animation: progressShimmer 2s linear infinite;
-  box-shadow: 0 0 10px #00ff00;
-}
-
-@keyframes progressShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.progress-percentage {
-  text-align: right;
-  font-size: 0.9rem;
-  color: #00aa00;
-}
-
-.loading-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  font-size: 1.5rem;
-  color: #00ff00;
-}
-
-.welcome-interface {
-  text-align: center;
-  color: #00ff00;
-  max-width: 600px;
-  padding: 2rem;
-}
-
-.welcome-text h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  margin: 0 0 1rem 0;
-  text-shadow: 0 0 30px #00ff00, 0 0 60px #00ff00;
-  letter-spacing: 0.1em;
-  line-height: 1.2;
-}
-
-.welcome-text p {
-  font-size: 1.2rem;
-  color: #00aa00;
-  margin: 0 0 2rem 0;
-  text-shadow: 0 0 10px #00aa00;
-}
-
-.matrix-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  max-width: 150px;
-  margin: 0 auto 2rem;
+  place-items: center;
+  overflow: hidden;
+  background: #0c0f10;
+  color: #f3f4f6;
+  font-family: var(--mono);
+  animation: matrix-reveal 300ms ease-out 900ms forwards;
 }
-
-.grid-cell {
-  width: 40px;
-  height: 40px;
-  border: 2px solid #00ff00;
-  background: rgba(0, 255, 0, 0.1);
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-  animation: gridPulse 2s ease-in-out infinite;
+.matrix-canvas, .matrix-vignette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
-
-@keyframes gridPulse {
-  0%, 100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
+.matrix-vignette {
+  background: radial-gradient(ellipse at center, #0c0f10f5 0%, #0c0f10ad 35%, #0c0f1022 75%, #0c0f10aa);
 }
-
-.access-granted {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #00ff00;
-  text-shadow: 0 0 20px #00ff00;
-  letter-spacing: 0.2em;
-  animation: accessBlink 1s ease-in-out infinite;
+.matrix-signature { position: relative; text-align: center; padding: 24px; }
+.matrix-prelude {
+  margin: 0 0 24px;
+  color: #9baea1;
+  font-size: 8px;
+  letter-spacing: 2px;
+  animation: matrix-arrive 250ms ease-out both;
 }
-
-@keyframes accessBlink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0.7;
-  }
+.matrix-wordmark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(30px, 6vw, 60px);
+  letter-spacing: -2px;
+  animation: matrix-arrive 350ms ease-out both;
 }
-
-@media (max-width: 768px) {
-  .loading-interface,
-  .welcome-interface {
-    padding: 1rem;
-    max-width: 90%;
-  }
-
-  .matrix-logo {
-    font-size: 1.5rem;
-  }
-
-  .bracket {
-    font-size: 2rem;
-  }
-
-  .loading-text {
-    font-size: 1rem;
-  }
-
-  .welcome-text h1 {
-    font-size: 2rem;
-  }
-
-  .welcome-text p {
-    font-size: 1rem;
-  }
-
-  .grid-cell {
-    width: 30px;
-    height: 30px;
-  }
-
-  .access-granted {
-    font-size: 1.2rem;
-  }
+.matrix-wordmark > span { color: #00ff66; font-weight: 400; }
+.matrix-wordmark strong { font-weight: 500; }
+.matrix-domain { color: #00ff66; }
+.matrix-wordmark > i {
+  width: 8px;
+  height: .65em;
+  margin-left: 3px;
+  background: #00ff66;
+  box-shadow: 0 0 20px #00ff6644;
 }
+.matrix-signal {
+  height: 1px;
+  max-width: 260px;
+  margin: 30px auto 19px;
+  background: #00ff661a;
+  overflow: hidden;
+}
+.matrix-signal > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #00ff66;
+  transform-origin: left;
+  animation: matrix-connect 650ms cubic-bezier(.2,.7,.3,1) both;
+}
+.matrix-status { position: relative; min-height: 14px; font-size: 9px; letter-spacing: 2px; }
+.matrix-connecting { color: #a0afa5; animation: matrix-hide 1ms 550ms forwards; }
+.matrix-granted {
+  position: absolute;
+  inset: 0;
+  color: #00ff66;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  animation: matrix-arrive 180ms 550ms ease-out forwards;
+}
+.matrix-granted i { width: 5px; height: 5px; border-radius: 50%; background: #00ff66; }
+.matrix-bottom {
+  position: absolute;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  inset-inline: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.matrix-bottom > span { color: #8d9c93; font-size: 8px; letter-spacing: 1px; }
+.matrix-bottom button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid #34473b;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #d0ded5;
+  background: #111b15;
+}
+.matrix-bottom button:hover { border-color: #00ff66; color: #00ff66; }
+.matrix-bottom kbd { color: #a1b2a7; font: 8px var(--mono); border-left: 1px solid #34473b; padding-left: 12px; }
+@keyframes matrix-arrive { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes matrix-connect { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes matrix-hide { to { opacity: 0; } }
+@keyframes matrix-reveal { to { opacity: 0; } }
+@media (max-width: 520px) {
+  .matrix-prelude { font-size: 6px; letter-spacing: 1px; }
+  .matrix-wordmark { gap: 8px; letter-spacing: -1px; }
+  .matrix-bottom { inset-inline: 20px; }
+  .matrix-bottom > span { max-width: 130px; font-size: 7px; line-height: 1.8; }
+}
+@media (prefers-reduced-motion: reduce) { .matrix-loader { display: none; } }

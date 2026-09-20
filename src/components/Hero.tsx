@@ -1,149 +1,26 @@
-import { motion } from 'framer-motion'
-import { ChevronDown, Github, Mail } from 'lucide-react'
-import profileImage from '../assets/me.jpg'
-import './Hero.css'
+import { ArrowDown, ArrowUpRight, Github, TerminalSquare } from 'lucide-react'
+import Terminal from './Terminal'
 
-const Hero = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
-  return (
-    <section id="hero" className="hero">
-      <div className="hero-container">
-        <div className="hero-layout">
-          <motion.div
-            className="hero-image"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
-            <div className="image-container">
-              <img src={profileImage} alt="Rohan Maharaj" className="profile-image" />
-              <div className="image-glow"></div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="hero-content"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-          <motion.h1
-            className="hero-title"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Hi, I'm <span className="highlight">Rohan Maharaj</span>
-          </motion.h1>
-          
-          <motion.h2
-            className="hero-subtitle"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            Full-Stack Developer & Technology Enthusiast
-          </motion.h2>
-          
-          <motion.p
-            className="hero-description"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            From curiosity about forex bots to graduating cum laude with a Bachelor of Computer and Information Sciences in Application Development,
-            I've discovered my burning passion for technology. I bring visions to life
-            through code with relentless dedication and innovative solutions.
-          </motion.p>
-          
-          <motion.div
-            className="hero-buttons"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            <button
-              className="btn btn-primary"
-              onClick={() => scrollToSection('projects')}
-            >
-              View My Work
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => scrollToSection('contact')}
-            >
-              Get In Touch
-            </button>
-          </motion.div>
-          
-          <motion.div
-            className="hero-social"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-          >
-            <a
-              href="https://github.com/RohanM007"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="mailto:rohanmaharaj708@gmail.com"
-              className="social-link"
-            >
-              <Mail size={24} />
-            </a>
-          </motion.div>
-        </motion.div>
+export default function Hero() {
+  return <section id="hero" className="hero-section shell">
+    <div className="hero-grid">
+      <div className="hero-copy">
+        <div className="eyebrow hero-status"><span className="status-dot" /> SYSTEM ONLINE <span className="muted">/</span> FULL-STACK DEVELOPER</div>
+        <h1>Curiosity to code.<br />Ideas to <span>reality.</span></h1>
+        <p className="hero-intro">Hi, I’m <strong>Rohan Maharaj.</strong> I build thoughtful web and mobile experiences, turning a relentless curiosity for technology into software that makes a difference.</p>
+        <div className="hero-actions">
+          <a className="button button-primary" href="#projects">Explore projects <ArrowUpRight size={17} /></a>
+          <a className="button" href="#terminal"><TerminalSquare size={16} /> Open terminal</a>
         </div>
-
-        <motion.div
-          className="scroll-indicator"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-          onClick={() => scrollToSection('about')}
-        >
-          <ChevronDown size={32} />
-          <span>Scroll to explore</span>
-        </motion.div>
+        <div className="hero-meta"><a href="https://github.com/RohanM007" target="_blank" rel="noreferrer"><Github size={15} /> rohanm007 <ArrowUpRight size={12} /></a><span className="meta-line" /><span>Developer. Educator. Always learning.</span></div>
       </div>
-      
-      <div className="hero-background">
-        <div className="floating-elements">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="floating-element"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 0.1, scale: 1 }}
-              transition={{
-                duration: 2,
-                delay: i * 0.1,
-                repeat: Infinity,
-                repeatType: "reverse",
-                repeatDelay: Math.random() * 2
-              }}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`
-              }}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+      <div className="hero-terminal-wrap"><div className="terminal-overline"><span>PROFILE.EXE</span><span>01 / INTRODUCTION</span></div><Terminal preview /><div className="terminal-under"><span className="status-dot" /> HUMAN BEHIND THE CODE <span>100% CURIOSITY</span></div></div>
+    </div>
+    <div className="hero-bottom">
+      <div><span className="metric-value">Cum laude<span> ↗</span></span><span className="metric-label">APPLICATION DEVELOPMENT GRADUATE</span></div>
+      <div><span className="metric-value">Web + Mobile</span><span className="metric-label">END-TO-END DEVELOPMENT</span></div>
+      <div><span className="metric-value">Code + Teach</span><span className="metric-label">BUILDING & SHARING KNOWLEDGE</span></div>
+      <a href="#about" className="scroll-cue" aria-label="Scroll to about"><ArrowDown size={18} /></a>
+    </div>
+  </section>
 }
-
-export default Hero
