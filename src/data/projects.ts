@@ -1,5 +1,21 @@
-export const projects = [
+export type Project = {
+  id: 'drakewoods' | 'mend' | 'portfolio' | 'kingdom-kids'
+  title: string
+  description: string
+  longDescription: string
+  technologies: string[]
+  type: string
+  duration: string
+  highlights: string[]
+  category: string
+  githubLink?: string
+  facebookLink?: string
+  liveLink?: string
+}
+
+export const projects: Project[] = [
     {
+      id: 'drakewoods',
       title: "Drakewoods Website & Mobile App",
       description: "A comprehensive digital solution for Drakewoods in Pietermaritzburg, featuring both a responsive website and native Android application. This project showcased my ability to deliver complete end-to-end solutions.",
       longDescription: "Built from January to July 2025, this project involved creating a modern, responsive website using React and a native Android application using Kotlin. The backend was powered by Google Cloud Functions, providing scalable and reliable services.",
@@ -17,6 +33,7 @@ export const projects = [
     },
     {
       title: "Mend Mental Health App",
+      id: 'mend',
       description: "A mental health support application designed to provide resources and tools for mental wellness. This project demonstrates my commitment to creating technology that makes a positive impact.",
       longDescription: "Developed as part of my academic journey, this application focuses on mental health support with user-friendly interfaces and helpful resources for mental wellness. My cousin won an award at her school for this project!",
       technologies: ["Mobile Development", "UI/UX Design", "Health Tech"],
@@ -38,25 +55,26 @@ export const projects = [
     
     {
       title: "Portfolio Website",
+      id: 'portfolio',
       description: "This very portfolio you're viewing! Built with React, TypeScript, and Framer Motion to showcase my journey and skills in an interactive and engaging way.",
-      longDescription: "A modern, responsive portfolio website featuring a matrix loading screen, smooth animations, and professional design. Built to tell my story and showcase my technical capabilities.",
+      longDescription: "A responsive, Matrix-inspired portfolio with an interactive terminal, accessible navigation, and a focus on telling my story through real projects.",
       technologies: ["React", "TypeScript", "Framer Motion", "CSS3", "Responsive Design", "Vite"],
       type: "Web Development",
       duration: "2024",
       highlights: [
-        "Matrix-style loading animation",
-        "Smooth scroll animations",
-        "Responsive design",
-        "Professional storytelling",
-         "Mobile Responsiveness",
-        "Modern tech stack"
+        "Interactive terminal with keyboard command history",
+        "Responsive layouts for desktop, tablet, and mobile",
+        "Accessible navigation and reduced-motion support",
+        "React, TypeScript, and Tailwind CSS"
       ],
-      category: "Personal"
+      category: "Personal",
+      githubLink: "https://github.com/RohanM007/RohanWebsite"
     },
     {
     title: "Kingdom Kids Website",
-    description: "A responsive website developed for Kingdom Kids, designed to provide a modern and accessible online presence while making important information easy for parents and visitors to find.",
-    longDescription: "Developed as a complete website solution for Kingdom Kids, with a focus on clean design, usability, responsive layouts, and accessibility across desktop and mobile devices. The project involved designing and developing the website, preparing it for production, and deploying the completed build to a live hosting environment. Access the link here: https://www.kingdomkidspreschool.co.za/",
+    id: 'kingdom-kids',
+    description: "A responsive website built for Kingdom Kids Preschool & Daycare, giving the school an online home where parents can find important information and get in touch.",
+    longDescription: "Designed, developed, and deployed a complete website for Kingdom Kids Preschool & Daycare. The project focuses on clear navigation, accessible information for parents, and responsive layouts across desktop and mobile devices.",
     technologies: [
       "React",
       "TypeScript",
@@ -77,6 +95,7 @@ export const projects = [
     ],
     category: "Professional",
     githubLink: "https://github.com/RohanM007/TimWebsite",
+    liveLink: "https://www.kingdomkidspreschool.co.za/",
 
     
   },

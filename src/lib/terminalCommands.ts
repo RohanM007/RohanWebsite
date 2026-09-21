@@ -10,7 +10,7 @@ export function executeCommand(raw: string): CommandResult {
     github: 'Find my work at https://github.com/RohanM007\nUse the GitHub link in the contact card to visit.',
   }
   if (command === 'clear') return { action: 'clear', output: '' }
-  if (command === 'projects') return { action: 'projects', output: 'Opening selected projects: Drakewoods, Mend, and this portfolio.' }
+  if (command === 'projects') return { action: 'projects', output: 'Opening selected projects: Drakewoods, Mend, this portfolio, and Kingdom Kids.' }
   if (command === 'email') return { action: 'email', href: 'mailto:rohanmaharaj708@gmail.com?subject=Hello%20Rohan', output: 'Opening your email app with a draft. Send it there to finish.' }
   if (command.startsWith('send')) {
     const match = raw.trim().match(/^send\s+--email\s+([^\s@]+@[^\s@]+\.[^\s@]+)$/i)
