@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react'
-import { rememberIntro, shouldShowIntro } from './lib/intro'
 import MatrixLoader from './components/MatrixLoader'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -11,9 +10,8 @@ import Contact from './components/Contact'
 import './App.css'
 
 export default function App() {
-  const [loading, setLoading] = useState(shouldShowIntro)
+  const [loading, setLoading] = useState(true)
   const finishIntro = useCallback(() => {
-    rememberIntro()
     setLoading(false)
     requestAnimationFrame(() => document.getElementById('main')?.focus({ preventScroll: true }))
   }, [])
