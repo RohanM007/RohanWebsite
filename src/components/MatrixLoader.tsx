@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
-import { INTRO_DURATION, INTRO_FADE_DURATION, shouldAnimateIntro } from '../lib/intro'
+import { INTRO_DURATION, INTRO_FADE_DURATION } from '../lib/intro'
 import './MatrixLoader.css'
 
 const characters = '01アイウエオカキクケコサシスセソタチツテト'
@@ -51,8 +51,6 @@ export default function MatrixLoader({ onComplete }: { onComplete: () => void })
     let previousTime = 0
     let width = 0
     let height = 0
-    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    let animate = shouldAnimateIntro()
     let streams: { x: number; y: number; speed: number; alpha: number }[] = []
     const resize = () => {
       width = window.innerWidth
@@ -69,8 +67,8 @@ export default function MatrixLoader({ onComplete }: { onComplete: () => void })
       }))
     }
     const draw = (time: number) => {
-      if (animate) frame = requestAnimationFrame(draw)
-      if (animate && time - previousTime < 33) return
+      frame = requestAnimationFrame(draw)
+      if (time - previousTime < 33) return
       const delta = previousTime ? Math.min((time - previousTime) / 1000, 0.1) : 0
       previousTime = time
       context.clearRect(0, 0, width, height)
@@ -90,17 +88,11 @@ export default function MatrixLoader({ onComplete }: { onComplete: () => void })
       draw(performance.now())
     }
     const handleResize = () => { resize(); redraw() }
-    const motionChanged = () => {
-      animate = !motion.matches
-      redraw()
-    }
     handleResize()
     window.addEventListener('resize', handleResize)
-    motion.addEventListener('change', motionChanged)
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener('resize', handleResize)
-      motion.removeEventListener('change', motionChanged)
     }
   }, [])
 

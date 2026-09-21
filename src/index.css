@@ -28,5 +28,9 @@ svg { flex-shrink: 0; }
 p { line-height: 1.75; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* The skippable Matrix intro always plays its rain and exit animation. */
+  *:not(.matrix-loader, .matrix-loader *), *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

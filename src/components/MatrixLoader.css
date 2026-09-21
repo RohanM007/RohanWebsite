@@ -115,7 +115,3 @@
   .matrix-bottom { inset-inline: 20px; }
   .matrix-bottom > span { max-width: 130px; font-size: 7px; line-height: 1.8; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .matrix-loader, .matrix-loader * { animation: none !important; transition: none !important; }
-  .matrix-loader--leaving { opacity: 1; }
-}
